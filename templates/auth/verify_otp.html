@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Verify your code — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section auth-section">
+  <div class="auth-card">
+    <span class="divider-ring"><span class="ring"></span><span class="eyebrow">One more step</span></span>
+    <h1 style="font-size:1.7rem;">Enter your verification code</h1>
+    <p style="margin-bottom:1.75rem;">
+      We sent a 6-digit code to <strong>{{ email }}</strong> (and your phone, if you added one).
+      It expires in a few minutes, so check now.
+    </p>
+
+    <form method="POST" action="{{ url_for('auth.verify_login_otp') if login_otp is defined else url_for('auth.verify_otp') }}" novalidate>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-field">
+        <label for="otp">6-digit code</label>
+        <input type="text" id="otp" name="otp" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" required autofocus>
+      </div>
+      <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Confirm &amp; continue</button>
+    </form>
+
+    {% if login_otp is not defined %}
+    <p class="auth-switch">Didn't get it? <a href="{{ url_for('auth.resend_otp') }}">Resend code</a></p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Customer Reviews — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section" style="padding-bottom:2rem;">
+  <span class="divider-ring"><span class="ring"></span><span class="eyebrow">Reviews</span></span>
+  <h1 style="font-size:2.2rem; max-width:22ch;">What clients say about working with us.</h1>
+  {% if review_count > 0 %}
+  <p style="font-size:1.05rem;">
+    <span style="color:var(--gold-1); font-weight:700; font-family:'Syne',sans-serif;">{{ avg_rating }} / 5</span>
+    average from {{ review_count }} review{{ 's' if review_count != 1 }}.
+  </p>
+  {% endif %}
+</section>
+
+<section class="page-section tight">
+  <div class="contact-wrap">
+    <div>
+      <h2>All reviews</h2>
+      {% if reviews %}
+        <div style="display:grid; gap:1.1rem;">
+          {% for r in reviews %}
+          <div class="testi-card">
+            <div class="star-row">
+              {% for i in range(1,6) %}
+                <span class="star {{ 'filled' if i <= r.rating }}">&#9733;</span>
+              {% endfor %}
+            </div>
+            <p class="quote">&ldquo;{{ r.comment }}&rdquo;</p>
+            <p class="who">{{ r.name }}<span>{{ r.created_at.strftime('%b %d, %Y') }}</span></p>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No reviews yet — be the first to share your experience.</p>
+      {% endif %}
+    </div>
+
+    <div>
+      <h2>Leave a review</h2>
+      <form method="POST" action="{{ url_for('reviews.submit_review') }}" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name"
+                 value="{{ current_user.name if current_user.is_authenticated else '' }}"
+                 {{ 'readonly' if current_user.is_authenticated }} required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email"
+                 value="{{ current_user.email if current_user.is_authenticated else '' }}"
+                 {{ 'readonly' if current_user.is_authenticated }} required>
+        </div>
+        <div class="form-field">
+          <label for="rating">Rating</label>
+          <select id="rating" name="rating" required>
+            <option value="">Select a rating</option>
+            <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; — Excellent</option>
+            <option value="4">&#9733;&#9733;&#9733;&#9733; — Good</option>
+            <option value="3">&#9733;&#9733;&#9733; — Average</option>
+            <option value="2">&#9733;&#9733; — Below average</option>
+            <option value="1">&#9733; — Poor</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="comment">Your review</label>
+          <textarea id="comment" name="comment" rows="5" placeholder="Tell us about your project experience..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Post review</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

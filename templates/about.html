@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}About Us — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section" style="padding-bottom:2rem;">
+  <span class="divider-ring"><span class="ring"></span><span class="eyebrow">About us</span></span>
+  <h1 style="font-size:2.3rem; max-width:20ch;">Engineers first. AI second. Hype never.</h1>
+  <p style="max-width:60ch; font-size:1.02rem;">AI.WITH CRAZZYYY started as one simple frustration: too many "AI projects" were slide decks with no working code behind them. We build the opposite — practical, tested, production-ready AI, ML, GenAI and automation systems that hold up outside a demo.</p>
+</section>
+
+<section class="page-section tight">
+  <div class="split">
+    <div>
+      <h2>Our story</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="when">Year 1</span>
+          <h3>Started as a Python automation consultancy</h3>
+          <p>Small businesses needed their spreadsheets and manual reports turned into scripts that ran themselves. We obliged, one script at a time.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="when">Year 2</span>
+          <h3>Moved into machine learning</h3>
+          <p>Automation clients started asking for predictions, not just pipelines — churn, demand, pricing. We built our first models into production.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="when">Year 3</span>
+          <h3>Added generative AI &amp; GenAI assistants</h3>
+          <p>As LLMs matured, we started building retrieval-augmented assistants and copilots directly into clients' existing tools.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="when">Today</span>
+          <h3>Teaching what we build</h3>
+          <p>We now mentor engineers and run cohort-based training, because the fastest way to scale AI adoption is to teach people to build it themselves.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>What we believe</h2>
+      <div class="value-list">
+        <div class="value-item">
+          <span class="num">01</span>
+          <div>
+            <h3 style="font-size:1rem;">Shipped beats polished</h3>
+            <p>A working model in production teaches you more than a perfect one in a notebook.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="num">02</span>
+          <div>
+            <h3 style="font-size:1rem;">Explain it or it doesn't count</h3>
+            <p>If we can't explain how a model reaches a decision, we don't ship it as-is.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="num">03</span>
+          <div>
+            <h3 style="font-size:1rem;">Automate the boring, not the important</h3>
+            <p>We automate the repetitive work so your team can spend time on the judgment calls.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="num">04</span>
+          <div>
+            <h3 style="font-size:1rem;">Teach as you go</h3>
+            <p>Every engagement leaves your team more capable than it found them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section tight" style="text-align:center;">
+  <h2 style="font-size:1.7rem;">Want to work with us?</h2>
+  <p style="max-width:50ch; margin:0 auto 1.5rem;">We take on a limited number of projects at a time so every client gets direct access to the engineers doing the work.</p>
+  <a href="{{ url_for('contact') }}" class="btn btn-gold">Contact us</a>
+</section>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}My Account — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section" style="padding-bottom:1.5rem;">
+  <span class="divider-ring"><span class="ring"></span><span class="eyebrow">My account</span></span>
+  <h1 style="font-size:2rem;">{{ current_user.name }}</h1>
+  <p>{{ current_user.email }} &middot; <span class="badge badge-delivered">{{ current_user.role }}</span></p>
+</section>
+
+<section class="page-section tight" style="padding-top:0;">
+  <div class="split">
+    <div class="card" style="padding:1.75rem;">
+      <h3>Security</h3>
+      <p style="font-size:.9rem;">Two-factor authentication sends a one-time code to your email (and phone, if provided) every time you log in.</p>
+      <form method="POST" action="{{ url_for('auth.toggle_2fa') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn {{ 'btn-gold' if not current_user.two_factor_enabled else 'btn-ghost' }}">
+          {{ 'Enable two-factor authentication' if not current_user.two_factor_enabled else 'Disable two-factor authentication' }}
+        </button>
+      </form>
+      <p style="font-size:.8rem; margin-top:1rem; color:var(--ink-faint);">
+        Status: <strong style="color:{{ 'var(--gold-1)' if current_user.two_factor_enabled else 'var(--ink-dim)' }};">
+          {{ 'Enabled' if current_user.two_factor_enabled else 'Disabled' }}
+        </strong>
+      </p>
+      <p style="font-size:.8rem; color:var(--ink-faint);">
+        Account created: {{ current_user.created_at.strftime('%d %b %Y') }}<br>
+        Last login: {{ current_user.last_login.strftime('%d %b %Y, %H:%M') if current_user.last_login else '—' }}
+      </p>
+    </div>
+
+    <div class="card" style="padding:1.75rem;">
+      <h3>Recent login activity</h3>
+      {% if recent_logs %}
+      <table class="data-table">
+        <thead><tr><th>When</th><th>Status</th><th>IP address</th></tr></thead>
+        <tbody>
+          {% for log in recent_logs %}
+          <tr>
+            <td>{{ log.timestamp.strftime('%d %b %Y, %H:%M') }}</td>
+            <td><span class="badge {{ 'badge-delivered' if log.status=='success' else 'badge-delayed' }}">{{ log.status }}</span></td>
+            <td>{{ log.ip_address or '—' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p style="font-size:.85rem;">No login activity recorded yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

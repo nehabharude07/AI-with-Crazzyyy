@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% import "_icons.html" as icons %}
+{% block title %}AI.WITH CRAZZYYY — Custom AI, ML & GenAI Engineering{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <svg class="hero-rings" viewBox="0 0 400 400" fill="none" stroke="#e8bd52" stroke-width="1">
+    <circle cx="200" cy="200" r="170" opacity="0.15"/>
+    <circle cx="200" cy="200" r="120" opacity="0.25"/>
+    <circle cx="200" cy="200" r="70" opacity="0.35"/>
+    <circle cx="270" cy="200" r="4" fill="#e8bd52" stroke="none" opacity="0.6"/>
+    <circle cx="200" cy="130" r="3" fill="#e8bd52" stroke="none" opacity="0.5"/>
+  </svg>
+
+  <div class="hero-copy">
+    <span class="eyebrow">LangChain &middot; LangGraph &middot; RAG &middot; Agentic AI</span>
+    <h1>We build <em>AI that ships</em>, not just AI that demos.</h1>
+    <p class="lead">AI.WITH CRAZZYYY designs and engineers industry-grade AI, ML and generative AI systems using advanced techniques like LangChain and LangGraph — solving real business problems, not just running demos.</p>
+    <div class="hero-actions">
+      <a href="{{ url_for('contact') }}" class="btn btn-gold">Start a project</a>
+      <a href="{{ url_for('services') }}" class="btn btn-ghost">
+        Explore services
+        <span class="cta-arrow" aria-hidden="true">
+          <svg width="26" height="16" viewBox="0 0 32 18" fill="none"><path d="M1 9h26" stroke="#e8bd52" stroke-width="2" stroke-linecap="round"/><path d="M20 2l8 7-8 7" stroke="#e8bd52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="logo-orbit">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AI.WITH CRAZZYYY brand mark">
+    </div>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="stat"><div class="num">40+</div><div class="label">Models &amp; pipelines shipped</div></div>
+  <div class="stat"><div class="num">6</div><div class="label">Industries served</div></div>
+  <div class="stat"><div class="num">14 hrs</div><div class="label">Avg. weekly hours automated away</div></div>
+  <div class="stat"><div class="num">98%</div><div class="label">Client satisfaction</div></div>
+</div>
+
+<section class="page-section">
+  <div class="section-head">
+    <span class="divider-ring"><span class="ring"></span><span class="eyebrow">What we do</span></span>
+    <h2>Four ways we help you move faster</h2>
+    <p>From a single GenAI feature to a full industry-grade automation overhaul, we build with advanced techniques like LangChain and LangGraph, tested and handed over with documentation you can actually use.</p>
+  </div>
+
+  <div class="grid">
+    {% for s in services %}
+    <div class="card">
+      <div class="icon-badge">{{ icons.icon(s.icon) }}</div>
+      <h3>{{ s.title }}</h3>
+      <p>{{ s.desc }}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="ic">{{ icons.icon('brain') }}</div>
+      <div class="name">Innovate</div>
+    </div>
+    <div class="pillar">
+      <div class="ic">{{ icons.icon('code') }}</div>
+      <div class="name">Develop</div>
+    </div>
+    <div class="pillar">
+      <div class="ic">{{ icons.icon('bars') }}</div>
+      <div class="name">Automate</div>
+    </div>
+    <div class="pillar">
+      <div class="ic">{{ icons.icon('cap') }}</div>
+      <div class="name">Educate</div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section tight">
+  <div class="section-head">
+    <span class="divider-ring"><span class="ring"></span><span class="eyebrow">Client voices</span></span>
+    <h2>Trusted by teams who need things to actually work</h2>
+  </div>
+  <div class="testi-grid">
+    {% for t in testimonials %}
+    <div class="testi-card">
+      <p class="quote">&ldquo;{{ t.quote }}&rdquo;</p>
+      <p class="who">{{ t.name }}<span>{{ t.role }}</span></p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="page-section tight" style="text-align:center;">
+  <h2 style="font-size:1.9rem;">Have a project in mind?</h2>
+  <p style="max-width:50ch; margin:0 auto 1.5rem;">Tell us what you're trying to build or automate — we'll reply within one business day with a clear next step.</p>
+  <a href="{{ url_for('contact') }}" class="btn btn-gold">Get in touch</a>
+</section>
+{% endblock %}

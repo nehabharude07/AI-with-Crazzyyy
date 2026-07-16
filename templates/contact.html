@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% import "_icons.html" as icons %}
+{% block title %}Contact Us — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section" style="padding-bottom:2rem;">
+  <span class="divider-ring"><span class="ring"></span><span class="eyebrow">Contact us</span></span>
+  <h1 style="font-size:2.2rem; max-width:22ch;">Let's talk about what you're building.</h1>
+  <p style="max-width:60ch; font-size:1.02rem;">Send a few details below and we'll reply within one business day with a clear next step — no sales script, just an honest read on your project.</p>
+</section>
+
+<section class="page-section tight">
+  <div class="contact-wrap">
+    <form method="POST" action="{{ url_for('contact') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" placeholder="Jordan Lee" required>
+      </div>
+      <div class="form-field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="jordan@company.com" required>
+      </div>
+      <div class="form-field">
+        <label for="message">Tell us about your project</label>
+        <textarea id="message" name="message" rows="6" placeholder="What are you trying to build or automate?" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-gold">Send message</button>
+    </form>
+
+    <div>
+      <div class="contact-info-item">
+        <div class="icon-badge">{{ icons.icon('mail') }}</div>
+        <div>
+          <h3>Email</h3>
+          <p>aiwithcrazzyyy1905@gmail.com</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="icon-badge">{{ icons.icon('phone') }}</div>
+        <div>
+          <h3>Phone</h3>
+          <p>+91 9322356794</p>
+          <p>+91 7620160287</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="icon-badge">{{ icons.icon('pin') }}</div>
+        <div>
+          <h3>Based in</h3>
+          <p>Nashik, Maharashtra, India — working with clients worldwide</p>
+        </div>
+      </div>
+      <div style="margin-top:2rem; padding:1.5rem; background:var(--panel); border:1px solid var(--line); border-radius:14px;">
+        <h3 style="font-size:.95rem;">Response time</h3>
+        <p style="font-size:.85rem; margin-bottom:0;">We reply to every enquiry within one business day. For urgent requests, mention it in your message.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

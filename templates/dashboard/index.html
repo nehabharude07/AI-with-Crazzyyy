@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section" style="padding-bottom:1.5rem;">
+  <span class="divider-ring"><span class="ring"></span><span class="eyebrow">Internal dashboard</span></span>
+  <h1 style="font-size:2rem;">Project delivery overview</h1>
+  <p>Logged in as <strong>{{ current_user.name }}</strong> ({{ current_user.role }})</p>
+</section>
+
+<section class="page-section tight" style="padding-top:0;">
+  <div class="stat-cards">
+    <div class="stat-card">
+      <div class="num">{{ stats.total_projects }}</div>
+      <div class="label">Total projects</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">{{ stats.delivered_count }}</div>
+      <div class="label">Delivered</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">{{ stats.in_progress_count }}</div>
+      <div class="label">In progress</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">{{ stats.avg_delivery_days }}</div>
+      <div class="label">Avg. days to deliver</div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="card chart-card">
+      <h3>Projects by category</h3>
+      <canvas id="pieChart"></canvas>
+    </div>
+    <div class="card chart-card">
+      <h3>Avg. delivery time by category (days)</h3>
+      <canvas id="barChart"></canvas>
+    </div>
+    <div class="card chart-card chart-card-wide">
+      <h3>Projects delivered per month</h3>
+      <canvas id="lineChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem; overflow-x:auto;">
+    <h3>All projects</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Project</th><th>Category</th><th>Status</th><th>Started</th><th>Delivered</th><th>Days to deliver</th></tr>
+      </thead>
+      <tbody>
+        {% for p in projects %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td>{{ p.category }}</td>
+          <td><span class="badge badge-{{ p.status }}">{{ p.status.replace('_', ' ') }}</span></td>
+          <td>{{ p.start_date.strftime('%d %b %Y') }}</td>
+          <td>{{ p.delivered_date.strftime('%d %b %Y') if p.delivered_date else '—' }}</td>
+          <td>{{ p.delivery_days if p.delivery_days is not none else '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script>
+  const chartData = {{ chart_data | safe }};
+  const goldPalette = ['#e8bd52', '#c9a24a', '#a9791f', '#f6d878', '#8a6d1f', '#d4a017'];
+
+  Chart.defaults.color = '#a39d8f';
+  Chart.defaults.borderColor = 'rgba(232,189,82,0.12)';
+  Chart.defaults.font.family = "'Inter', sans-serif";
+
+  new Chart(document.getElementById('pieChart'), {
+    type: 'pie',
+    data: {
+      labels: chartData.pie.labels,
+      datasets: [{ data: chartData.pie.values, backgroundColor: goldPalette, borderColor: '#131316', borderWidth: 2 }]
+    },
+    options: { plugins: { legend: { position: 'bottom' } }, responsive: true }
+  });
+
+  new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+      labels: chartData.bar.labels,
+      datasets: [{ label: 'Avg days', data: chartData.bar.values, backgroundColor: '#e8bd52', borderRadius: 6 }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false } },
+        y: { grid: { color: 'rgba(232,189,82,0.08)' }, beginAtZero: true }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('lineChart'), {
+    type: 'line',
+    data: {
+      labels: chartData.line.labels,
+      datasets: [{
+        label: 'Delivered',
+        data: chartData.line.values,
+        borderColor: '#e8bd52',
+        backgroundColor: 'rgba(232,189,82,0.15)',
+        tension: 0.35,
+        fill: true,
+        pointBackgroundColor: '#f6d878',
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false } },
+        y: { grid: { color: 'rgba(232,189,82,0.08)' }, beginAtZero: true, ticks: { precision: 0 } }
+      }
+    }
+  });
+</script>
+{% endblock %}

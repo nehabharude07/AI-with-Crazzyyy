@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% import "_icons.html" as icons %}
+{% block title %}Services — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section" style="padding-bottom:2rem;">
+  <span class="divider-ring"><span class="ring"></span><span class="eyebrow">Services</span></span>
+  <h1 style="font-size:2.2rem; max-width:22ch;">Everything between an idea and a running system.</h1>
+  <p style="max-width:60ch; font-size:1.02rem;">Pick a single service or bring us in end-to-end — from the first prototype to the model that's still running quietly in production a year later.</p>
+</section>
+
+<section class="page-section tight">
+  <div class="grid">
+    {% for s in services %}
+    <div class="card">
+      <div class="icon-badge">{{ icons.icon(s.icon) }}</div>
+      <h3>{{ s.title }}</h3>
+      <p>{{ s.desc }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="page-section tight">
+  <div class="section-head">
+    <span class="divider-ring"><span class="ring"></span><span class="eyebrow">How we work</span></span>
+    <h2>A straightforward process</h2>
+  </div>
+  <div class="split">
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="when">Step 1</span>
+        <h3>Discovery call</h3>
+        <p>We learn your data, constraints and goal, and tell you honestly whether AI is the right tool for it.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="when">Step 2</span>
+        <h3>Scoped proposal</h3>
+        <p>A clear scope, timeline and price — no open-ended retainers unless you want one.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="when">Step 3</span>
+        <h3>Build in the open</h3>
+        <p>Weekly check-ins and a working preview early, not just at the end.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="when">Step 4</span>
+        <h3>Handover &amp; support</h3>
+        <p>Documentation, a walkthrough, and a support window so your team can run it confidently.</p>
+      </div>
+    </div>
+    <div>
+      <h2>Not sure what you need?</h2>
+      <p>Most engagements start with a short discovery call rather than a fixed service. We'll help you figure out whether the answer is a model, a script, an assistant, or simply better data hygiene.</p>
+      <a href="{{ url_for('contact') }}" class="btn btn-gold">Book a discovery call</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

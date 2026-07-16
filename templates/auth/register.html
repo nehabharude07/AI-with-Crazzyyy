@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Create an account — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section auth-section">
+  <div class="auth-card">
+    <span class="divider-ring"><span class="ring"></span><span class="eyebrow">Create account</span></span>
+    <h1 style="font-size:1.7rem;">Join AI.WITH CRAZZYYY</h1>
+    <p style="margin-bottom:1.75rem;">Create an account to leave reviews, track projects, and access your dashboard.</p>
+
+    <a href="{{ url_for('auth.google_login') }}" class="btn btn-ghost google-btn">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.56 2.7-3.87 2.7-6.62Z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.36 0-4.35-1.6-5.06-3.74H.94v2.33A9 9 0 0 0 9 18Z"/><path fill="#FBBC05" d="M3.94 10.68A5.4 5.4 0 0 1 3.66 9c0-.58.1-1.15.28-1.68V4.99H.94A9 9 0 0 0 0 9c0 1.45.35 2.83.94 4.01l3-2.33Z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.46 3.44 1.35l2.58-2.58C13.46.9 11.43 0 9 0A9 9 0 0 0 .94 4.99l3 2.33C4.65 5.18 6.64 3.58 9 3.58Z"/></svg>
+      Continue with Google
+    </a>
+    <div class="auth-divider"><span>or register with email</span></div>
+
+    <form method="POST" action="{{ url_for('auth.register') }}" novalidate>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-field">
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" value="{{ name }}" required>
+      </div>
+      <div class="form-field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" value="{{ email }}" required>
+      </div>
+      <div class="form-field">
+        <label for="phone">Phone number <span class="hint">(optional — enables SMS OTP)</span></label>
+        <input type="tel" id="phone" name="phone" value="{{ phone }}" placeholder="+91XXXXXXXXXX">
+      </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <span class="hint">At least 8 characters, with uppercase, lowercase, a number and a symbol.</span>
+      </div>
+      <div class="form-field">
+        <label for="confirm_password">Confirm password</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+      </div>
+      <div class="form-field">
+        <label for="captcha">Quick check: what is {{ captcha_prompt }}?</label>
+        <input type="text" id="captcha" name="captcha" required autocomplete="off">
+      </div>
+      <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">Create account</button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
+  </div>
+</section>
+{% endblock %}

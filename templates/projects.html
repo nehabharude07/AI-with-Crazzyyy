@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Projects — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section" style="padding-bottom:2rem;">
+  <span class="divider-ring"><span class="ring"></span><span class="eyebrow">Projects</span></span>
+  <h1 style="font-size:2.2rem; max-width:22ch;">A few things we've built recently.</h1>
+  <p style="max-width:60ch; font-size:1.02rem;">Names and details are lightly anonymized, but every project below is a real system running in production or in an active classroom.</p>
+</section>
+
+<section class="page-section tight">
+  <div class="grid">
+    {% for p in projects %}
+    <div class="card">
+      <span class="eyebrow" style="display:block; margin-bottom:.6rem;">{{ p.tag }}</span>
+      <h3>{{ p.name }}</h3>
+      <p>{{ p.desc }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="page-section tight" style="text-align:center;">
+  <h2 style="font-size:1.7rem;">Have something similar in mind?</h2>
+  <p style="max-width:50ch; margin:0 auto 1.5rem;">Tell us about your data and the outcome you want — we'll tell you what it would take to build.</p>
+  <a href="{{ url_for('contact') }}" class="btn btn-gold">Start the conversation</a>
+</section>
+{% endblock %}

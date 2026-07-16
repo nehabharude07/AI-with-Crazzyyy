@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}AI.WITH CRAZZYYY — AI, ML & GenAI Studio{% endblock %}</title>
+<meta name="description" content="AI.WITH CRAZZYYY builds custom AI, ML, GenAI and Python solutions — from generative AI assistants to full process automation.">
+<link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<noscript><style>.reveal-base{opacity:1 !important; transform:none !important;} .word-reveal{opacity:1 !important; transform:none !important; animation:none !important;}</style></noscript>
+</head>
+<body>
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <a href="{{ url_for('home') }}" class="sidebar-brand">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AI.WITH CRAZZYYY logo">
+      <div class="brand-text">
+        <strong>AI.WITH CRAZZYYY</strong>
+        <span>ADVANCED AI ENGINEERING</span>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <span class="nav-label">Navigate</span>
+
+      <a href="{{ url_for('home') }}" class="nav-item {{ 'active' if active=='home' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+        Home
+      </a>
+      <a href="{{ url_for('about') }}" class="nav-item {{ 'active' if active=='about' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.3"/><path d="M5 20c1.2-3.8 4-5.7 7-5.7s5.8 1.9 7 5.7"/></svg>
+        About Us
+      </a>
+      <a href="{{ url_for('services') }}" class="nav-item {{ 'active' if active=='services' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.3"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.3"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.3"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.3"/></svg>
+        Services
+      </a>
+      <a href="{{ url_for('projects') }}" class="nav-item {{ 'active' if active=='projects' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7a1 1 0 0 1 1-1H9l2 2h8.5a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1Z"/></svg>
+        Projects
+      </a>
+      <a href="{{ url_for('reviews.list_reviews') }}" class="nav-item {{ 'active' if active=='reviews' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.8Z"/></svg>
+        Reviews
+      </a>
+      <a href="{{ url_for('contact') }}" class="nav-item {{ 'active' if active=='contact' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="1.5"/><path d="M4 6.5 12 13l8-6.5"/></svg>
+        Contact Us
+      </a>
+
+      {% if current_user.is_authenticated and current_user.role in ['admin', 'manager'] %}
+      <a href="{{ url_for('dashboard.index') }}" class="nav-item {{ 'active' if active=='dashboard' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="9" rx="1.2"/><rect x="13.5" y="3.5" width="7" height="5" rx="1.2"/><rect x="13.5" y="11.5" width="7" height="9" rx="1.2"/><rect x="3.5" y="15.5" width="7" height="5" rx="1.2"/></svg>
+        Dashboard
+      </a>
+      {% endif %}
+
+      <span class="nav-label" style="margin-top:1.25rem;">Account</span>
+      {% if current_user.is_authenticated %}
+      <a href="{{ url_for('auth.profile') }}" class="nav-item {{ 'active' if active=='profile' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.3"/><path d="M5 20c1.2-3.8 4-5.7 7-5.7s5.8 1.9 7 5.7"/></svg>
+        <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ current_user.name.split(' ')[0] }}</span>
+      </a>
+      <a href="{{ url_for('auth.logout') }}" class="nav-item">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1.5"/><path d="M9.5 12h11m0 0-3-3m3 3-3 3"/></svg>
+        Logout
+      </a>
+      {% else %}
+      <a href="{{ url_for('auth.login') }}" class="nav-item {{ 'active' if active=='login' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1.5"/><path d="M20.5 12h-11m0 0 3-3m-3 3 3 3"/></svg>
+        Login
+      </a>
+      <a href="{{ url_for('auth.register') }}" class="nav-item {{ 'active' if active=='register' }}">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c1-3.6 3.6-5.4 6-5.4s5 1.8 6 5.4"/><path d="M18 8.5v5M15.5 11h5"/></svg>
+        Register
+      </a>
+      {% endif %}
+    </nav>
+
+    <div class="sidebar-foot">
+      <div>&copy; {{ current_year }} AI.WITH CRAZZYYY</div>
+      <div class="pillar-row">
+        <span>INNOVATE</span><span>DEVELOP</span><span>AUTOMATE</span><span>EDUCATE</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="page-section tight" style="padding-bottom:0;">
+          {% for category, msg in messages %}
+            <div class="flash {{ category }}">{{ msg }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="site-footer">
+      <div>AI.WITH CRAZZYYY — Custom AI, ML, GenAI &amp; Python engineering.</div>
+      <div>Industry-grade AI systems &mdash; LangChain, LangGraph &amp; agentic engineering</div>
+    </footer>
+  </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

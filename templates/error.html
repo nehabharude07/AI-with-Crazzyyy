@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} — AI.WITH CRAZZYYY{% endblock %}
+
+{% block content %}
+<section class="page-section" style="text-align:center; padding-top:6rem;">
+  <span class="divider-ring" style="justify-content:center;"><span class="ring"></span><span class="eyebrow">Error {{ code }}</span></span>
+  <h1 style="font-size:2.2rem;">{{ message }}</h1>
+  <a href="{{ url_for('home') }}" class="btn btn-gold" style="margin-top:1rem;">Back to home</a>
+</section>
+{% endblock %}
