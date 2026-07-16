@@ -26,7 +26,7 @@ flask seed-db
 python app.py
 ```
 
-Open **http://127.0.0.1:5000**.
+Open **http://127.0.0.1:5109**.
 
 **Demo admin login:** `admin@aiwithcrazzyy.dev` / `Admin@12345`
 (change this password immediately in a real deployment — it's only for you to see the dashboard).
@@ -61,11 +61,6 @@ To get **real** codes delivered:
 
 > No other SMS provider is wired in. If you're outside India or want a different provider (Twilio, MSG91, etc.), swap the request in `send_sms_otp()` inside `utils.py` — it's one function.
 
-### Google Sign-In (Google Cloud, free)
-1. Go to https://console.cloud.google.com/apis/credentials
-2. Create an OAuth Client ID (type: Web application).
-3. Add authorized redirect URI: `http://127.0.0.1:5000/auth/google/callback` (add your real domain's equivalent once deployed).
-4. In `.env`, set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`.
 
 ## Project structure
 
