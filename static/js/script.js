@@ -1,4 +1,4 @@
-alert("NEW SCRIPT IS RUNNING");
+// alert("NEW SCRIPT IS RUNNING");
 document.addEventListener("DOMContentLoaded", function () {
 
   /* ---------------- sidebar toggle (mobile) ---------------- */
